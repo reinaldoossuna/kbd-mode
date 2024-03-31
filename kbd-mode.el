@@ -62,7 +62,13 @@
   :group 'kbd)
 
 (defcustom kbd-mode-kexpr
-  '("defcfg" "defsrc" "defalias")
+  '("defcfg" "defsrc" "defalias" "defoverrides"
+    "include"
+    "deflocalkeys-win" "deflocalkeys-winiov2"
+    "deflocalkeys-wintercept" "deflocalkeys-linux"
+    "deflocalkeys-macos"
+    "defvirtualkeys" "deffakekeys" "defseq"
+    "defchords" "defaliasenvcond")
   "A K-Expression."
   :type '(repeat string)
   :group 'kbd-highlight)
@@ -84,7 +90,16 @@
   :group 'kbd-highlight)
 
 (defcustom kbd-mode-defcfg-options
-  '("input" "output" "cmp-seq-delay" "cmp-seq" "init" "fallthrough" "allow-cmd")
+  '("input" "output" "cmp-seq-delay" "cmp-seq" "init" "fallthrough" "allow-cmd"
+    "danger-enable-cmd" "sequence-timeout" "sequence-timeout-input-mode"
+    "sequence-backtrack-modcancel" "log-layer-changes" "delegate-to-first-layer"
+    "movemouse-inherit-accel-state" "movemouse-smooth-diagonals" "dynamic-macro-max-presses"
+    "concurrent-tap-hold" "block-unmapped-keys" "rapid-event-delay" "linux-dev"
+    "linux-dev-names-include" "linux-dev-names-exclude" "linux-continue-if-no-devs-found"
+    "linux-unicode-u-code" "linux-unicode-termination" "linux-x11-repeat-delay-rate"
+    "macos-dev-names-include" "windows-altgr" "windows-interception-mouse-hwid"
+    "windows-interception-mouse-hwids" "windows-interception-keyboard-hwids"
+    "chord")
   "Options to give to `defcfg'."
   :type '(repeat string)
   :group 'kbd-highlight)
@@ -93,13 +108,28 @@
   '("around-next-timeout" "around-next-single" "around-next" "around"
     "tap-hold-next-release" "tap-hold-next" "tap-next-release" "tap-hold"
     "tap-macro-release" "tap-macro" "multi-tap" "tap-next" "layer-toggle"
-    "layer-switch" "layer-add" "layer-rem" "layer-delay" "layer-next" "cmd-button")
+    "layer-switch" "layer-add" "layer-rem" "layer-delay" "layer-next" "cmd-button"
+    "tap-dance" "tap-dance-eager"
+    "one-shot" "one-shot-press" "one-shot-release" "one-shot-press-pcancel"
+    "one-shot-release-pcancel"
+    "tap-hold-press" "tap-hold-release" "tap-hold-press-timeout" "tap-hold-release-timeout"
+    "tap-hold-except-keys"
+    "fork" "caps-word" "unmod" "cmd" "cmd-output-keys" "arbitrary-code"
+    "layer-while-held"
+    "multi" "switch"
+    "key-history" "key-timing")
   "Button modifiers."
   :type '(repeat string)
   :group 'kbd-highlight)
 
 (defcustom kbd-mode-show-string
-  '("uinput-sink" "device-file" "cmd-button")
+  '("uinput-sink" "device-file" "cmd-button"
+    "rpt"
+    "mlft" "mmid" "mrgt" "mfwd" "mbck"
+    "mltp"    "mmtp"    "mrtp"    "mftp"    "mbtp"
+    "mwheel-up"    "mwheel-down"    "mwheel-left"    "mwheel-right"
+    "movemouse-up"    "movemouse-down"    "movemouse-left"    "movemouse-right"
+    "movemouse-accel-up" "movemouse-accel-down" "movemouse-accel-left" "movemouse-accel-right")
   "Syntax highlight strings in S-expressions.
 When an S-expression begins with any of these keywords, highlight
 strings (delimited by double quotes) inside it."
