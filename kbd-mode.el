@@ -132,12 +132,6 @@ strings (delimited by double quotes) inside it."
   :type '(repeat string)
   :group 'kbd-highlight)
 
-(defcustom kbd-mode-show-macros t
-  "Whether to syntax highlight macros inside layout definitions.
-Default: t"
-  :type 'boolean
-  :group 'kbd-highlight)
-
 ;;;; Faces
 
 (defgroup kbd-highlight-faces nil
@@ -174,18 +168,6 @@ Default: t"
   "Face for strings."
   :group 'kbd-highlight-faces)
 
-;;;; Functions
-
-(defun kbd-mode--show-macros? (show-macros)
-  "Decide whether to font-lock macros.
-If the argument SHOW-MACROS is non-nil, font-lock macros of the
-form `@MACRO-NAME' with `kbd-mode-variable-name-face'."
-  (let ((macro-regexp '(("\\(:?\\(@[^[:space:]]+\\)\\)"
-                         (1 'kbd-mode-variable-name-face)))))
-    (if show-macros
-        (font-lock-add-keywords 'kbd-mode macro-regexp)
-      (font-lock-remove-keywords 'kbd-mode macro-regexp))))
-
 ;;; Vars
 
 (defvar kbd-mode-syntax-table
@@ -209,6 +191,7 @@ form `@MACRO-NAME' with `kbd-mode-variable-name-face'."
         (token-regexp            (regexp-opt kbd-mode-tokens           'words))
         (defcfg-options-regexp   (regexp-opt kbd-mode-defcfg-options   'words))
         (button-modifiers-regexp (regexp-opt kbd-mode-button-modifiers 'words))
+        (alias-regexp "\\(:?\\(@[^[:space:]]+\\)\\)")
         (function-one-regexp
          (concat "\\(?:\\("
                  (regexp-opt kbd-mode-function-one)
@@ -227,6 +210,7 @@ form `@MACRO-NAME' with `kbd-mode-variable-name-face'."
       (,function-one-regexp
        (1 'kbd-mode-kexpr-face        )
        (2 'kbd-mode-variable-name-face))
+      (,alias-regexp            (1 'kbd-mode-string-face))
       (,string-regexp
        ("\"[^}]*?\""
         (progn (goto-char (match-beginning 0)) (match-end 0))
