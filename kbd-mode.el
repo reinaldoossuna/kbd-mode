@@ -191,6 +191,7 @@ strings (delimited by double quotes) inside it."
         (token-regexp            (regexp-opt kbd-mode-tokens           'words))
         (defcfg-options-regexp   (regexp-opt kbd-mode-defcfg-options   'words))
         (button-modifiers-regexp (regexp-opt kbd-mode-button-modifiers 'words))
+        (var-regexp "\\(:?\\($[^[:space:]]+\\)\\)")
         (alias-regexp "\\(:?\\(@[^[:space:]]+\\)\\)")
         (function-one-regexp
          (concat "\\(?:\\("
@@ -210,6 +211,7 @@ strings (delimited by double quotes) inside it."
       (,function-one-regexp
        (1 'kbd-mode-kexpr-face        )
        (2 'kbd-mode-variable-name-face))
+      (,var-regexp              (1 'kbd-mode-variable-name-face))
       (,alias-regexp            (1 'kbd-mode-string-face))
       (,string-regexp
        ("\"[^}]*?\""
